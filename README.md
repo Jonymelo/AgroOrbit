@@ -7,7 +7,7 @@ Plataforma de monitoramento espacial de queimadas e risco climático no Bioma Ca
 ---
 
 ## O problema
-Milhões de pequenos produtores rurais do Semiárido enfrentam grandes perdas nas safras sem conseguir se preparar com antecedência. No Bioma Caatinga, nos três anos analisados (2022, 2023 e 2024), setembro e outubro concentram os maiores volumes de focos de queimadas — mais de 80 mil focos em setembro e 127 mil em outubro (médias dos 3 anos). A precipitação cai a menos de 15mm nesses meses, criando condições extremas para incêndios e perdas agrícolas.
+Milhões de pequenos produtores rurais do Semiárido enfrentam grandes perdas nas safras sem conseguir se preparar com antecedência. No Bioma Caatinga, nos três anos analisados (2022, 2023 e 2024), setembro e outubro concentram os maiores volumes de focos de queimadas: mais de 80 mil focos em setembro e 127 mil em outubro (médias dos 3 anos). A precipitação cai a menos de 15mm nesses meses, criando condições extremas para incêndios e perdas agrícolas.
 
 Em 2024, a Caatinga registrou aumento de 38% nos focos de calor em relação ao ano anterior, em meio à seca prolongada do Sertão.
 
@@ -25,17 +25,17 @@ Funcionalidades principais:
 ---
 
 ## Fontes de dados
-- **INPE BDQueimadas:** focos de calor detectados por satélite — 1,85 milhão de focos nos 9 estados
-- **CHIRPS UCSB:** precipitação por satélite (resolução 0.05°, mensal) — 36 meses (2022-2024)
+- **INPE BDQueimadas:** focos de calor detectados por satélite, 1,85 milhão de focos nos 9 estados
+- **CHIRPS UCSB:** precipitação por satélite (resolução 0.05°, mensal), 36 meses (2022-2024)
 - **INMET:** temperatura e umidade via rede de 1.026 estações de superfície
 - **TerraBrasilis (INPE):** portal de download dos dados de focos
-- **IBGE 2024:** Bioma Predominante por Município — lista oficial de 1.095 municípios da Caatinga
+- **IBGE 2024:** Bioma Predominante por Município, lista oficial de 1.095 municípios da Caatinga
 - **GOV.BR:** delimitação territorial oficial do Bioma Caatinga
 
 **Período analisado:** 2022, 2023 e 2024  
 **Nota:** O projeto foi desenvolvido em 2026. Os dados de 2025 não estavam consolidados nas fontes no período de coleta, o que é comum para dados científicos que passam por validação antes da publicação.  
-**Bioma:** Caatinga — AL, BA, CE, MG, PB, PE, PI, RN e SE  
-**Cobertura:** 130 microrregiões · 1.073 municípios
+**Bioma:** Caatinga, AL, BA, CE, MG, PB, PE, PI, RN e SE  
+**Cobertura:** 130 microrregiões, 1.073 municípios
 
 ---
 
@@ -49,7 +49,7 @@ Cada microrregião recebe um índice de risco mensal entre 0 e 1:
 | Umidade do ar (INMET) | 25% | Baixa umidade = maior risco |
 | Temperatura (INMET) | 15% | Alta temperatura = maior risco |
 
-Classificação: Baixo (< 0,30) · Médio (0,30-0,50) · Alto (0,50-0,70) · Crítico (≥ 0,70)
+Classificação: Baixo (< 0,30), Médio (0,30-0,50), Alto (0,50-0,70), Crítico (maior ou igual a 0,70)
 
 ---
 
@@ -65,7 +65,7 @@ Classificação: Baixo (< 0,30) · Médio (0,30-0,50) · Alto (0,50-0,70) · Cr�
 
 ## Estrutura do projeto
 ```
-AgroÓrbit/
+AgroOrbit/
 ├── index.html
 ├── mapa_caatinga.html
 ├── README.md
@@ -92,11 +92,11 @@ AgroÓrbit/
 - **ODS 2:** Fome Zero e Agricultura Sustentável
 - **ODS 9:** Indústria, Inovação e Infraestrutura
 - **ODS 13:** Ação Contra a Mudança Global do Clima
-- **ODS 15:** Vida Terrestre — proteção do Bioma Caatinga
- 
+- **ODS 15:** Vida Terrestre, proteção do Bioma Caatinga
+
 ---
 
 ## Global Solution FIAP 2026
 Faculdade de Informática e Administração Paulista  
-Tecnologia em Data Science, Big Data, BI & Data Engineering  
-Global Solution 1º Semestre 2026 · Turma 1TSC
+Tecnologia em Data Science, Big Data, BI e Data Engineering  
+Global Solution 1º Semestre 2026, Turma 1TSC
