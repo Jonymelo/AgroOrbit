@@ -2781,40 +2781,44 @@
         }});
     }
 
-    function initCharts2024() {
-        // usando médias dos 3 anos (2022, 2023, 2024)
-        const d = {
-            focos:  [364,230,651,311,1048,1739,1299,2428,8230,3683,558,756],
-            indice: [0.303,0.285,0.240,0.268,0.310,0.340,0.385,0.440,0.498,0.520,0.470,0.440],
-            precip: [314.4,327.7,32.5,94.7,7.5,0,0,0,0,49.3,191.6,71.1],
-            umid:   [76.2,75.9,71.3,75.0,66.0,59.0,53.2,44.2,33.9,47.3,68.1,68.9],
-            tempI:  [26.2,25.9,27.1,26.3,24.7,23.5,22.7,25.2,27.4,29.1,26.6,26.8],
-            tempN:  [26.2,25.6,27.6,26.8,27.0,25.2,24.1,26.0,27.2,29.4,26.6,28.1],
-        };
+    // ── GRÁFICOS QUEIMADAS ──
+    function initChartsQueimadas() {
+        // Médias 2022+2023+2024 - INPE BDQueimadas
+        var f = [13595,7070,5567,4511,7281,10929,16060,29480,81507,127213,61738,50271];
+        var idx = [0.313,0.285,0.208,0.224,0.301,0.321,0.386,0.443,0.499,0.521,0.469,0.467];
+        var pr = [95.2,95.4,174.0,129.9,85.6,72.5,43.2,22.0,11.0,11.2,48.5,48.2];
         makeChart('chartQueimadas','bar',meses,[{
-            data:d.focos,
-            backgroundColor:d.focos.map(v=>v>5000?'rgba(180,20,20,0.7)':v>2000?'rgba(180,80,0,0.5)':'rgba(0,200,255,0.15)'),
-            borderColor:d.focos.map(v=>v>5000?'#b41414':v>2000?'#b45000':'#00c8ff'),
+            data:f,
+            backgroundColor:f.map(function(v){return v>50000?'rgba(180,20,20,0.8)':v>20000?'rgba(180,80,0,0.6)':v>8000?'rgba(200,140,0,0.5)':'rgba(0,200,255,0.15)';}),
+            borderColor:f.map(function(v){return v>50000?'#b41414':v>20000?'#b45000':v>8000?'#b48c00':'#00c8ff';}),
             borderWidth:1,borderRadius:2,borderSkipped:false
         }]);
         makeChart('chartIndiceRisco','line',meses,[
-            {label:'Índice Risco',data:d.indice,borderColor:'#2d9e5a',backgroundColor:'rgba(45,158,90,0.06)',fill:true,tension:0.4,pointBackgroundColor:'#2d9e5a',pointRadius:4,yAxisID:'y'},
-            {label:'Focos',data:d.focos,type:'bar',backgroundColor:'rgba(180,20,20,0.15)',borderColor:'rgba(180,20,20,0.4)',borderWidth:1,yAxisID:'y1'}
+            {label:'Índice de Risco',data:idx,borderColor:'#cc4400',backgroundColor:'rgba(200,60,0,0.06)',fill:true,tension:0.4,pointBackgroundColor:'#cc4400',pointRadius:4,yAxisID:'y'},
+            {label:'Focos',data:f,type:'bar',backgroundColor:'rgba(180,20,20,0.15)',borderColor:'rgba(180,20,20,0.4)',borderWidth:1,yAxisID:'y1'}
         ],{y1:{color:'#5a2a2a'}});
         makeChart('chartCorrelação','line',meses,[
-            {label:'Chuva (mm)',data:d.precip,borderColor:'#00c8ff',backgroundColor:'transparent',tension:0.4,pointRadius:3},
-            {label:'Índice ×100',data:d.indice.map(v=>v*100),borderColor:'#2d9e5a',backgroundColor:'transparent',tension:0.4,pointRadius:3},
-            {label:'Focos ÷100',data:d.focos.map(v=>v/100),borderColor:'#b41414',backgroundColor:'transparent',tension:0.4,pointRadius:3}
-        ]);
-        makeChart('chartPrecipitação','bar',meses,[
-            {label:'Precipitação (mm)',data:d.precip,backgroundColor:'rgba(0,100,200,0.5)',borderColor:'#0064c8',borderWidth:1,borderRadius:2,yAxisID:'y'},
-            {label:'Umidade (%)',data:d.umid,type:'line',borderColor:'#2d9e5a',backgroundColor:'transparent',tension:0.4,pointBackgroundColor:'#2d9e5a',pointRadius:3,yAxisID:'y1'}
-        ],{y1:{color:'#2d9e5a',min:0,max:100}});
-        makeChart('chartTemperatura','line',meses,[
-            {label:'Temp. INMET (°C)',data:d.tempI,borderColor:'#c87800',backgroundColor:'rgba(200,120,0,0.06)',fill:true,tension:0.4,pointBackgroundColor:'#c87800',pointRadius:4},
-            {label:'Temp. NASA (°C)',data:d.tempN,borderColor:'#00c8ff',backgroundColor:'transparent',tension:0.4,borderDash:[4,4],pointBackgroundColor:'#00c8ff',pointRadius:4}
+            {label:'Chuva (mm)',data:pr,borderColor:'#00c8ff',backgroundColor:'transparent',tension:0.4,pointRadius:3},
+            {label:'Índice x100',data:idx.map(function(v){return v*100;}),borderColor:'#cc4400',backgroundColor:'transparent',tension:0.4,pointRadius:3},
+            {label:'Focos /1000',data:f.map(function(v){return v/1000;}),borderColor:'#b41414',backgroundColor:'transparent',tension:0.4,pointRadius:3}
         ]);
     }
+
+    // ── GRÁFICOS CLIMA ──
+    function initChartsClima() {
+        // Médias 2022+2023+2024 - CHIRPS UCSB + INMET
+        var pr = [95.2,95.4,174.0,129.9,85.6,72.5,43.2,22.0,11.0,11.2,48.5,48.2];
+        var um = [66.0,66.4,67.0,66.6,66.6,66.9,66.5,66.3,66.1,66.1,65.6,65.6];
+        var tp = [26.4,26.5,26.5,26.4,26.4,26.4,26.5,26.5,26.7,26.6,26.5,26.7];
+        makeChart('chartPrecipitação','bar',meses,[
+            {label:'Precipitação (mm)',data:pr,backgroundColor:'rgba(0,100,200,0.5)',borderColor:'#0064c8',borderWidth:1,borderRadius:2,yAxisID:'y'},
+            {label:'Umidade (%)',data:um,type:'line',borderColor:'#2d9e5a',backgroundColor:'transparent',tension:0.4,pointBackgroundColor:'#2d9e5a',pointRadius:3,yAxisID:'y1'}
+        ],{y1:{color:'#2d9e5a',min:0,max:100}});
+        makeChart('chartTemperatura','line',meses,[
+            {label:'Temperatura média (°C)',data:tp,borderColor:'#c87800',backgroundColor:'rgba(200,120,0,0.06)',fill:true,tension:0.4,pointBackgroundColor:'#c87800',pointRadius:4}
+        ]);
+    }
+
 
     function initChartsHistórico() {
         const cores={2022:'#00c8ff',2023:'#ff8800',2024:'#ff2244'};
