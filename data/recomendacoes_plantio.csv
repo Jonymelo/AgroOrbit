@@ -1,0 +1,13 @@
+mes,score,nivel,ndvi_medio,chuva_media,focos_medio,umidade_media,recomendacao
+Jan,4,IDEAL,0.54,173.3,510,77.2,"Excelente para plantio. Chuva, vegetação e baixo risco."
+Fev,4,IDEAL,0.61,122.0,467,75.3,"Excelente para plantio. Chuva, vegetação e baixo risco."
+Mar,4,IDEAL,0.56,61.5,617,74.2,"Excelente para plantio. Chuva, vegetação e baixo risco."
+Abr,4,IDEAL,0.46,54.8,644,74.4,"Excelente para plantio. Chuva, vegetação e baixo risco."
+Mai,1,EVITAR,0.37,1.8,1574,67.0,Período de seca e queimadas. Evite plantio.
+Jun,1,EVITAR,0.3,0.0,2104,60.0,Período de seca e queimadas. Evite plantio.
+Jul,0,EVITAR,0.26,0.0,2102,54.2,Período de seca e queimadas. Evite plantio.
+Ago,0,EVITAR,0.25,3.2,2839,46.5,Período de seca e queimadas. Evite plantio.
+Set,0,EVITAR,0.23,5.5,7632,38.7,Período de seca e queimadas. Evite plantio.
+Out,0,EVITAR,0.29,38.2,10704,44.1,Período de seca e queimadas. Evite plantio.
+Nov,2,REGULAR,0.37,214.7,1295,66.8,Condições medianas. Planeje com cuidado.
+Dez,4,IDEAL,0.49,120.7,991,67.4,"Excelente para plantio. Chuva, vegetação e baixo risco."
