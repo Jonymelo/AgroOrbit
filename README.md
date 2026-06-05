@@ -9,7 +9,7 @@ Plataforma de monitoramento espacial de queimadas e risco climático no Bioma Ca
 ## O problema
 Milhões de pequenos produtores rurais do Semiárido enfrentam grandes perdas nas safras sem conseguir se preparar com antecedência. No Bioma Caatinga, nos três anos analisados (2022, 2023 e 2024), setembro e outubro concentram os maiores volumes de focos de queimadas: mais de 80 mil focos em setembro e 127 mil em outubro (médias dos 3 anos). A precipitação cai a menos de 15mm nesses meses, criando condições extremas para incêndios e perdas agrícolas.
 
-Em 2024, a Caatinga registrou aumento de 38% nos focos de calor em relação ao ano anterior, em meio à seca prolongada do Sertão.
+Em 2024, a Caatinga registrou aumento de 38% nos focos de calor em relação ao ano anterior, em meio à seca prolongada do Sertão. (Fonte: INPE BDQueimadas, 2024)
 
 ## O que o AgroÓrbit faz
 Cruza dados do INPE, CHIRPS e INMET com um modelo preditivo de Machine Learning para gerar alertas simples e acessíveis sobre risco climático em 130 microrregiões do Bioma Caatinga, permitindo que o agricultor se prepare antes que o problema vire prejuízo.
@@ -35,7 +35,8 @@ Funcionalidades principais:
 **Período analisado:** 2022, 2023 e 2024  
 **Nota:** O projeto foi desenvolvido em 2026. Os dados de 2025 não estavam consolidados nas fontes no período de coleta, o que é comum para dados científicos que passam por validação antes da publicação.  
 **Bioma:** Caatinga, AL, BA, CE, MG, PB, PE, PI, RN e SE  
-**Cobertura:** 130 microrregiões, 1.073 municípios
+**Cobertura:** 130 microrregiões, 1.073 municípios  
+**Nota sobre municípios:** Os 1.095 são o total oficial do IBGE para o Bioma Caatinga. Os 1.073 são os municípios efetivamente cobertos pelo monitoramento após filtragem das microrregiões disponíveis nas fontes.
 
 ---
 
