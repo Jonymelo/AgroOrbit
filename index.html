@@ -1267,6 +1267,14 @@
         }
 
         /* ── MAPA CAATINGA (iframe) ── */
+        #page-regiao {
+            background: var(--black);
+            overflow: hidden;
+        }
+        #page-regiao iframe {
+            scrollbar-color: #333 #111;
+            scrollbar-width: thin;
+        }
         #page-regiao .page-header { padding-bottom: 24px; }
         #page-regiao iframe {
             border: none;
@@ -3412,18 +3420,18 @@
 
     // ── CLIMA: cards mensais ──
     const climaDados = [
-        {mes:'Jan',chuva:314.4,umid:76.2,temp:26.2,precip:'Alta',icone:'🌧️'},
-        {mes:'Fev',chuva:327.7,umid:75.9,temp:25.9,precip:'Alta',icone:'🌧️'},
-        {mes:'Mar',chuva:32.5, umid:71.3,temp:27.1,precip:'Baixa',icone:'⛅'},
-        {mes:'Abr',chuva:94.7, umid:75.0,temp:26.3,precip:'Média',icone:'🌦️'},
-        {mes:'Mai',chuva:7.5,  umid:66.0,temp:24.7,precip:'Seca',icone:'☀️'},
-        {mes:'Jun',chuva:0.0,  umid:59.0,temp:23.5,precip:'Seca',icone:'🌵'},
-        {mes:'Jul',chuva:0.0,  umid:53.2,temp:22.7,precip:'Seca',icone:'🌵'},
-        {mes:'Ago',chuva:0.0,  umid:44.2,temp:25.2,precip:'Seca',icone:'⚠️'},
-        {mes:'Set',chuva:0.0,  umid:33.9,temp:27.4,precip:'Crítico',icone:'🔥'},
-        {mes:'Out',chuva:49.3, umid:47.3,temp:29.1,precip:'Baixa',icone:'⛅'},
-        {mes:'Nov',chuva:191.6,umid:68.1,temp:26.6,precip:'Média',icone:'🌦️'},
-        {mes:'Dez',chuva:71.1, umid:68.9,temp:26.8,precip:'Média',icone:'🌦️'},
+        {mes:'Jan',chuva:95.2,  umid:66.0,temp:26.4,precip:'Media',  icone:'🌦️'},
+        {mes:'Fev',chuva:95.4,  umid:66.4,temp:26.5,precip:'Media',  icone:'🌦️'},
+        {mes:'Mar',chuva:174.0, umid:67.0,temp:26.5,precip:'Alta',   icone:'🌧️'},
+        {mes:'Abr',chuva:129.9, umid:66.6,temp:26.4,precip:'Alta',   icone:'🌧️'},
+        {mes:'Mai',chuva:85.6,  umid:66.6,temp:26.4,precip:'Media',  icone:'🌦️'},
+        {mes:'Jun',chuva:72.5,  umid:66.9,temp:26.4,precip:'Baixa',  icone:'⛅'},
+        {mes:'Jul',chuva:43.2,  umid:66.5,temp:26.5,precip:'Baixa',  icone:'☀️'},
+        {mes:'Ago',chuva:22.0,  umid:66.3,temp:26.5,precip:'Seca',   icone:'⚠️'},
+        {mes:'Set',chuva:11.0,  umid:66.1,temp:26.7,precip:'Critico',icone:'🔥'},
+        {mes:'Out',chuva:11.2,  umid:66.1,temp:26.6,precip:'Critico',icone:'🔥'},
+        {mes:'Nov',chuva:48.5,  umid:65.6,temp:26.5,precip:'Baixa',  icone:'⛅'},
+        {mes:'Dez',chuva:48.2,  umid:65.6,temp:26.7,precip:'Baixa',  icone:'⛅'},
     ];
 
     (function buildClimaCards() {
@@ -3462,20 +3470,20 @@
 
     // ── QUEIMADAS: slider mês a mês ──
     const sliderDados = [
-        {mes:'Janeiro',  focos:364,  chuva:314.4,umid:76.2,ndvi:0.53},
-        {mes:'Fevereiro',focos:230,  chuva:327.7,umid:75.9,ndvi:0.61},
-        {mes:'Março',    focos:651,  chuva:32.5, umid:71.3,ndvi:0.56},
-        {mes:'Abril',    focos:311,  chuva:94.7, umid:75.0,ndvi:0.46},
-        {mes:'Maio',     focos:1048, chuva:7.5,  umid:66.0,ndvi:0.36},
-        {mes:'Junho',    focos:1739, chuva:0.0,  umid:59.0,ndvi:0.29},
-        {mes:'Julho',    focos:1299, chuva:0.0,  umid:53.2,ndvi:0.26},
-        {mes:'Agosto',   focos:2428, chuva:0.0,  umid:44.2,ndvi:0.26},
-        {mes:'Setembro', focos:8230, chuva:0.0,  umid:33.9,ndvi:0.23},
-        {mes:'Outubro',  focos:3683, chuva:49.3, umid:47.3,ndvi:0.30},
-        {mes:'Novembro', focos:558,  chuva:191.6,umid:68.1,ndvi:0.37},
-        {mes:'Dezembro', focos:756,  chuva:71.1, umid:68.9,ndvi:0.49},
+        {mes:'Janeiro',  focos:13595, chuva:95.2,  umid:66.0, indice:0.313},
+        {mes:'Fevereiro',focos:7070,  chuva:95.4,  umid:66.4, indice:0.285},
+        {mes:'Março',    focos:5567,  chuva:174.0, umid:67.0, indice:0.208},
+        {mes:'Abril',    focos:4511,  chuva:129.9, umid:66.6, indice:0.224},
+        {mes:'Maio',     focos:7281,  chuva:85.6,  umid:66.6, indice:0.301},
+        {mes:'Junho',    focos:10929, chuva:72.5,  umid:66.9, indice:0.321},
+        {mes:'Julho',    focos:16060, chuva:43.2,  umid:66.5, indice:0.386},
+        {mes:'Agosto',   focos:29480, chuva:22.0,  umid:66.3, indice:0.443},
+        {mes:'Setembro', focos:81507, chuva:11.0,  umid:66.1, indice:0.499},
+        {mes:'Outubro',  focos:127213,chuva:11.2,  umid:66.1, indice:0.521},
+        {mes:'Novembro', focos:61738, chuva:48.5,  umid:65.6, indice:0.469},
+        {mes:'Dezembro', focos:50271, chuva:48.2,  umid:65.6, indice:0.467},
     ];
-    const sliderMax = {focos:8230, chuva:327.7, umid:76.2, ndvi:0.61};
+    const sliderMax = {focos:127213, chuva:174.0, umid:67.0, indice:0.521};
 
     function updateMesSlider() {
         const slider = document.getElementById('mesSlider');
@@ -3488,7 +3496,7 @@
         const focosCor = d.focos > 5000 ? '#cc2222' : d.focos > 1500 ? '#cc7700' : '#00c8ff';
         const choveuCor = d.chuva > 100 ? '#00c8ff' : d.chuva > 10 ? '#cc7700' : '#cc2222';
         const umidCor   = d.umid  > 60  ? '#2d9e5a' : d.umid > 45 ? '#cc7700' : '#cc2222';
-        const ndviCor   = d.ndvi  > 0.45? '#2d9e5a' : d.ndvi > 0.30? '#cc7700' : '#cc2222';
+        const ndviCor   = d.indice  > 0.45? '#2d9e5a' : d.indice > 0.30? '#cc7700' : '#cc2222';
         function bar(val, max, cor) {
             const pct = Math.round((val/max)*100);
             return `<div style="height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;margin-top:6px;">
@@ -3512,8 +3520,8 @@
             </div>
             <div style="background:#0d0d0d;padding:20px;border:1px solid var(--border);">
                 <div style="font-size:0.62rem;color:#555;letter-spacing:2px;margin-bottom:6px;">🌿 NDVI</div>
-                <div style="font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:${ndviCor};">${d.ndvi}</div>
-                ${bar(d.ndvi, sliderMax.ndvi, ndviCor)}
+                <div style="font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:${ndviCor};">${d.indice}</div>
+                ${bar(d.indice, sliderMax.indice, ndviCor)}
             </div>`;
     }
 
