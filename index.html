@@ -1431,6 +1431,18 @@
             padding: 8px 12px;
             background: rgba(255,255,255,0.03);
             border-left: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .alert-acao-item img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        @media (max-width: 480px) {
+            .alert-acao-item img { width: 18px; height: 18px; }
         }
 
         /* ── CALENDÁRIO DE PLANTIO ── */
@@ -1478,7 +1490,10 @@
             text-transform: uppercase;
             margin-bottom: 8px;
         }
-        .cal-cell-icon { font-size: 2rem; margin-bottom: 8px; }
+        .cal-cell-icon { margin-bottom: 8px; display: block; }
+        .cal-cell-icon img { width: 52px; height: 52px; object-fit: contain; display: block; }
+        @media (max-width: 768px) { .cal-cell-icon img { width: 40px; height: 40px; } }
+        @media (max-width: 480px) { .cal-cell-icon img { width: 32px; height: 32px; } }
         .cal-cell-nivel {
             font-size: 0.7rem;
             font-weight: 700;
@@ -3259,10 +3274,26 @@
     }
 
     const alertaAcoes = {
-        normal:  ['✅ Período favorável - mantenha a rotina da lavoura', '💧 Aproveite a chuva para irrigar áreas mais secas', '📋 Faça o inventário de insumos para o próximo ciclo'],
-        atenção: ['⚠️ Monitore a lavoura diariamente', '💧 Ative a irrigação preventiva nas áreas críticas', '🔥 Limpe o entorno da propriedade - risco de fogo aumentando'],
-        alerta:  ['🚨 Prepare aceiros ao redor da propriedade agora', '💧 Ligue o sistema de irrigação de emergência', '📞 Contate a Defesa Civil e vizinhos sobre o risco de fogo'],
-        crítico: ['🚒 Acione a brigada de combate a incêndios', '🚫 Não plante - condições impossibilitam qualquer cultivo', '📵 Evite qualquer atividade com fogo na propriedade'],
+        normal:  [
+            '<img src="data/icons/POSITIVO.png"   alt=""> Período favorável - mantenha a rotina da lavoura',
+            '<img src="data/icons/IRRIGACAO.png"  alt=""> Aproveite a chuva para irrigar áreas mais secas',
+            '<img src="data/icons/INVENTARIO.png" alt=""> Faça o inventário de insumos para o próximo ciclo'
+        ],
+        atenção: [
+            '<img src="data/icons/REGULAR.png"    alt=""> Monitore a lavoura diariamente',
+            '<img src="data/icons/IRRIGACAO.png"  alt=""> Ative a irrigação preventiva nas áreas críticas',
+            '<img src="data/icons/ACEIRO.png"     alt=""> Limpe o entorno da propriedade - risco de fogo aumentando'
+        ],
+        alerta:  [
+            '<img src="data/icons/ACEIRO.png"     alt=""> Prepare aceiros ao redor da propriedade agora',
+            '<img src="data/icons/IRRIGACAO.png"  alt=""> Ligue o sistema de irrigação de emergência',
+            '<img src="data/icons/EMERGENCIA.png" alt=""> Contate a Defesa Civil e vizinhos sobre o risco de fogo'
+        ],
+        crítico: [
+            '<img src="data/icons/EMERGENCIA.png" alt=""> Acione a brigada de combate a incêndios',
+            '<img src="data/icons/EVITAR.png"     alt=""> Não plante - condições impossibilitam qualquer cultivo',
+            '<img src="data/icons/ACEIRO.png"     alt=""> Evite qualquer atividade com fogo na propriedade'
+        ],
     };
     document.getElementById('alertsGrid').innerHTML = alertas.map((a,i)=>`
         <div class="alert-card ${a.nivel}">
@@ -3539,7 +3570,7 @@
             // coluna melhores
             + '<div style="background:var(--card);">'
             + '<div style="padding:12px 16px;border-bottom:1px solid #1a1a1a;display:flex;gap:8px;align-items:center;">'
-            + '<span>🌱</span>'
+            + '<img src="data/icons/IDEAL.png" alt="Recomendadas" style="width:18px;height:18px;object-fit:contain;">'
             + '<span style="font-family:monospace;font-size:0.65rem;color:#22a04a;letter-spacing:2px;">RECOMENDADAS - ' + nomeMes + '</span>'
             + '</div>'
             + htmlMelhores
@@ -3548,7 +3579,7 @@
             // coluna evitar
             + '<div style="background:var(--card);">'
             + '<div style="padding:12px 16px;border-bottom:1px solid #1a1a1a;display:flex;gap:8px;align-items:center;">'
-            + '<span>⚠️</span>'
+            + '<img src="data/icons/REGULAR.png" alt="Não recomendadas" style="width:18px;height:18px;object-fit:contain;">'
             + '<span style="font-family:monospace;font-size:0.65rem;color:#cc2222;letter-spacing:2px;">NÃO RECOMENDADAS - ' + nomeMes + '</span>'
             + '</div>'
             + htmlEvitar
@@ -3560,7 +3591,12 @@
 
 
     const calCores = { ideal:'#2d9e5a', bom:'#00c8ff', regular:'#cc7700', evitar:'#cc2222' };
-    const calIcons = { ideal:'🌱', bom:'☁️', regular:'⚠️', evitar:'🔥' };
+    const calIcons = {
+        ideal:   '<img src="data/icons/IDEAL.png"   alt="Ideal"   class="cal-nivel-img">',
+        bom:     '<img src="data/icons/BOM.png"     alt="Bom"     class="cal-nivel-img">',
+        regular: '<img src="data/icons/REGULAR.png" alt="Regular" class="cal-nivel-img">',
+        evitar:  '<img src="data/icons/EVITAR.png"  alt="Evitar"  class="cal-nivel-img">'
+    };
 
     (function buildCalGrid() {
         const grid = document.getElementById('calGrid');
