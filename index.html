@@ -2964,29 +2964,46 @@
         document.getElementById('valUmid').textContent   = umid.toFixed(0) + '%';
         document.getElementById('valTemp').textContent   = temp.toFixed(1) + '°C';
 
-        // Lógica baseada no modelo Random Forest treinado para a Caatinga
-        // Meses críticos da Caatinga: Set (9) e Out (10)
-        let nivel, msg, cor, probs;
-        const mesCritico = mes >= 8 && mes <= 11;
-        const secaIntensa = precip < 20 && umid < 65;
-        const secaMedia = precip < 60 && umid < 70;
+        // Índice de risco calculado com os mesmos pesos do modelo:
+        // Precipitação 35% + Umidade 35% + Temperatura 15% + Mês 15%
+        // (focos não é entrada do simulador, peso redistribuído)
 
-        if (mesCritico && secaIntensa && temp > 27) {
+        // Fator mensal baseado nos dados reais da Caatinga
+        var mesFator = [0.10,0.08,0.05,0.06,0.12,0.18,0.25,0.35,0.55,0.65,0.45,0.38];
+        var fMes = mesFator[mes - 1];
+
+        // Normalização de cada variável (0 = sem risco, 1 = risco máximo)
+        var rPrecip = Math.max(0, Math.min(1, 1 - precip / 180));   // 0mm = risco 1.0, 180mm+ = risco 0
+        var rUmid   = Math.max(0, Math.min(1, (90 - umid) / 65));   // 25% = risco 1.0, 90% = risco 0
+        var rTemp   = Math.max(0, Math.min(1, (temp - 22) / 16));   // 22°C = risco 0, 38°C+ = risco 1.0
+
+        var indice = rPrecip * 0.35 + rUmid * 0.35 + rTemp * 0.15 + fMes * 0.15;
+        indice = Math.min(1, indice);
+
+        let nivel, msg, cor, probs;
+
+        if (indice >= 0.60) {
             nivel = 'CRÍTICO'; cor = '#cc2222';
-            msg = 'Condições típicas do pico de seca da Caatinga. Mais de 50 mil focos esperados. Evite qualquer atividade com fogo.';
-            probs = [2, 5, 15, 78];
-        } else if (mesCritico || secaIntensa) {
+            msg = 'Condições de alto risco de queimadas. Evite qualquer atividade com fogo e acione a brigada de proteção.';
+            var p4 = Math.round(indice * 90); var p3 = Math.round((1-indice)*40);
+            var p2 = Math.round((1-indice)*30); var p1 = 100-p4-p3-p2;
+            probs = [Math.max(1,p1), Math.max(1,p2), Math.max(1,p3), Math.max(1,p4)];
+        } else if (indice >= 0.42) {
             nivel = 'ALERTA'; cor = '#ccaa00';
-            msg = 'Período de alto risco na Caatinga. Prepare aceiros, ative irrigação e monitore a propriedade diariamente.';
-            probs = [5, 12, 68, 15];
-        } else if (secaMedia || (mes >= 6 && mes <= 12)) {
+            msg = 'Risco elevado. Prepare aceiros, ative irrigação de emergência e monitore a propriedade diariamente.';
+            var p3 = Math.round(indice * 75); var p4 = Math.round(indice * 20);
+            var p2 = Math.round((1-indice)*50); var p1 = Math.max(1,100-p2-p3-p4);
+            probs = [Math.max(1,p1), Math.max(1,p2), Math.max(1,p3), Math.max(1,p4)];
+        } else if (indice >= 0.25) {
             nivel = 'ATENÇÃO'; cor = '#cc7700';
-            msg = 'Condições de atenção no Semiárido. Monitore as chuvas e esteja preparado para o período mais seco.';
-            probs = [10, 65, 18, 7];
+            msg = 'Condições de atenção. Monitore as chuvas e esteja preparado para o período mais seco.';
+            var p2 = Math.round(indice * 80); var p3 = Math.round(indice * 25);
+            var p1 = Math.max(5, 100-p2-p3-2); probs = [p1, p2, p3, 2];
         } else {
             nivel = 'NORMAL'; cor = '#2d9e5a';
             msg = 'Período favorável. Boas condições de chuva e umidade para a agricultura no Semiárido.';
-            probs = [82, 12, 4, 2];
+            var p1 = Math.round((1 - indice) * 90); var p2 = Math.round(indice * 40);
+            probs = [Math.max(50,p1), Math.max(5,p2), 3, 1];
         }
 
         document.getElementById('simNivel').textContent = nivel;
