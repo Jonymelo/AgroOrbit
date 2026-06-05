@@ -2747,7 +2747,10 @@
             var _tryC = function(n){ if(typeof Chart!=='undefined'){initChartsClima();climaChartsReady=true;}else if(n>0){setTimeout(function(){_tryC(n-1);},200);} };
             _tryC(10);
         }
-        if(!modeloChartsReady&&id==='modelo'){initModeloCharts();modeloChartsReady=true;}
+        if(!modeloChartsReady&&id==='modelo'){
+            var _tryM = function(n){ if(typeof Chart!=='undefined'){initModeloCharts();modeloChartsReady=true;}else if(n>0){setTimeout(function(){_tryM(n-1);},200);} };
+            _tryM(10);
+        }
         if(!histChartsReady&&id==='histórico'){
             var _tryH = function(n){ if(typeof Chart!=='undefined'){initChartsHistórico();histChartsReady=true;}else if(n>0){setTimeout(function(){_tryH(n-1);},200);} };
             _tryH(10);
@@ -2878,6 +2881,72 @@
             borderColor: ['#2d9e5a', '#b45000', '#b48c00', '#b41414'],
             borderWidth: 1,
         }]);
+
+        // Gráfico Tendência - Notebook 04
+        var elTend = document.getElementById('chartTendencia');
+        if (elTend) {
+            var existTend = Chart.getChart(elTend);
+            if (existTend) existTend.destroy();
+            new Chart(elTend, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025 (proj.)'],
+                    datasets: [
+                        {
+                            label: 'Focos reais outubro',
+                            data: [95845, 177219, 108577, null],
+                            backgroundColor: 'rgba(180,20,20,0.7)',
+                            borderColor: '#b41414', borderWidth: 1, borderRadius: 2
+                        },
+                        {
+                            label: 'Projeção 2025',
+                            data: [null, null, null, 127000],
+                            backgroundColor: 'rgba(255,136,0,0.5)',
+                            borderColor: '#ff8800', borderWidth: 1, borderRadius: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: tick, boxWidth: 12 }, display: true } },
+                    scales: {
+                        x: { grid: { color: grid }, ticks: { color: tick } },
+                        y: { grid: { color: grid }, ticks: { color: tick } }
+                    }
+                }
+            });
+        }
+
+        // Gráfico Clustering K-Means - Notebook 05 - dados reais Caatinga
+        var elClust = document.getElementById('chartClustering');
+        if (elClust) {
+            var existClust = Chart.getChart(elClust);
+            if (existClust) existClust.destroy();
+            var focosClust = [13595,7070,5567,4511,7281,10929,16060,29480,81507,127213,61738,50271];
+            var coresClust = focosClust.map(function(v) {
+                return v > 50000 ? '#b41414' : v > 20000 ? '#cc7700' : v > 8000 ? '#ccaa00' : '#2d9e5a';
+            });
+            new Chart(elClust, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                    datasets: [{
+                        data: focosClust,
+                        backgroundColor: coresClust,
+                        borderColor: coresClust,
+                        borderWidth: 1, borderRadius: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: grid }, ticks: { color: tick } },
+                        y: { grid: { color: grid }, ticks: { color: tick } }
+                    }
+                }
+            });
+        }
     }
 
     // Nomes dos meses
@@ -2940,69 +3009,6 @@
 
     // Inicializar simulador
     updateSim();
-
-    // Gráfico Tendência setembro - Notebook 04
-    const elTend = document.getElementById('chartTendencia');
-    if (elTend) {
-        new Chart(elTend, {
-            type: 'bar',
-            data: {
-                labels: ['2022', '2023', '2024', '2025 (proj.)'],
-                datasets: [
-                    {
-                        label: 'Focos reais',
-                        data: [null, 64251, 59224, null],
-                        backgroundColor: 'rgba(180,20,20,0.7)',
-                        borderColor: '#b41414', borderWidth: 1, borderRadius: 2
-                    },
-                    {
-                        label: 'Projeção 2025',
-                        data: [null, null, null, 65000],
-                        backgroundColor: 'rgba(255,136,0,0.5)',
-                        borderColor: '#ff8800', borderWidth: 1, borderRadius: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { labels: { color: tick, boxWidth: 12 }, display: true } },
-                scales: {
-                    x: { grid: { color: grid }, ticks: { color: tick } },
-                    y: { grid: { color: grid }, ticks: { color: tick } }
-                }
-            }
-        });
-    }
-
-    // Gráfico Clustering K-Means - Notebook 05
-    const elClust = document.getElementById('chartClustering');
-    if (elClust) {
-        const coresClust = [
-            '#2d9e5a','#2d9e5a','#2d9e5a','#2d9e5a',
-            '#cc7700','#cc7700','#ccaa00','#ccaa00',
-            '#cc2222','#ccaa00','#cc7700','#2d9e5a'
-        ];
-        new Chart(elClust, {
-            type: 'bar',
-            data: {
-                labels: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-                datasets: [{
-                    data: [364,230,651,311,1048,1739,1299,2428,8230,3683,558,756],
-                    backgroundColor: coresClust,
-                    borderColor: coresClust,
-                    borderWidth: 1, borderRadius: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { color: grid }, ticks: { color: tick } },
-                    y: { grid: { color: grid }, ticks: { color: tick } }
-                }
-            }
-        });
-    }
 
     // ALERTAS - média dos 3 anos
     // Dados reais da Caatinga — médias 2022+2023+2024 — INPE BDQueimadas + CHIRPS + INMET
