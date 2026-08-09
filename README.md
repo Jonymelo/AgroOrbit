@@ -96,6 +96,11 @@ AgroOrbit/
 - **ODS 15:** Vida Terrestre, proteção do Bioma Caatinga
 
 ---
+## Integrantes / Autores
+- **Diogo Alves Moitinho**
+- **Fernando Florence de Magalhães Lima**
+- **Jony Wesley Sousa Melo**
+---
 
 ## Global Solution FIAP 2026
 Faculdade de Informática e Administração Paulista  
